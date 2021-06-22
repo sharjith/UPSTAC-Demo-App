@@ -70,6 +70,14 @@ class LabRequestControllerTest {
 
         // Create an object of ResponseStatusException . Use assertThrows() method and pass assignForLabTest() method
         // of labRequestController with InvalidRequestId as Id
+
+        /*ResponseStatusException responseStatusException = assertThrows(ResponseStatusException.class,()->{
+
+            labRequestController.assignForLabTest(InvalidRequestId);
+        });*/
+
+        // The above test for ResponseStatusException fails because the method assignForLabTest calls the method
+        // TestRequestUpdateService.assignForLabTest which throws the AppException exception.
         AppException responseStatusException = assertThrows(AppException.class,()->{
 
             labRequestController.assignForLabTest(InvalidRequestId);
