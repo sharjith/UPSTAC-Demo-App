@@ -77,9 +77,12 @@ public class LabRequestController {
     public TestRequest assignForLabTest(@PathVariable Long id) {
 
 
-        User tester = userLoggedInService.getLoggedInUser();
-
-        return testRequestUpdateService.assignForLabTest(id, tester);
+        try {
+            User tester = userLoggedInService.getLoggedInUser();
+            return testRequestUpdateService.assignForLabTest(id, tester);
+        } catch (AppException e) {
+            throw asBadRequest(e.getMessage());
+        }
     }
 
     @PreAuthorize("hasAnyRole('TESTER')")
